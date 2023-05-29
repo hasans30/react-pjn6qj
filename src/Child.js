@@ -1,21 +1,32 @@
-import React from "react";
-import {DatePicker} from "@fluentui/react";
+import React from 'react';
+import { DatePicker, TextField } from '@fluentui/react';
 
-export default function Child({h2,cDate,cName,cEmail,onChange}) {
+export default function Child({ h2, cDate, cName, cEmail, onChange }) {
+  const [isFocus, setIsFocus] = React.useState(false);
 
-
-  const myChangeHandler=(newDate)=>{
+  const myChangeHandler = (newDate) => {
     onChange(newDate);
   };
-  return (<>
-  <h2>{h2}</h2>
-  <input type="text" id="name" name="name" value={cName} />
+  const DateComponent = React.useMemo(() => {
+    return (
+      <DatePicker
+        label="Start date"
+        value={cDate}
+        onSelectDate={myChangeHandler}
+      />
+    );
+  });
 
-   <DatePicker label="Start date" value={cDate}
- onSelectDate={myChangeHandler}  /> 
-    <input type="email" id="email" name="email" placeholder={"email@domain.om"} value={cEmail}/>
-  <div>New Value {cDate?.toString()}</div>
-  <button > my button </button>
-  </>
-  );
-} 
+  const TextComponent = React.useMemo(() => {
+    return (
+      <TextField
+        value={cDate}
+        onFocus={() => {
+          setIsFocus(true);
+        }}
+      />
+    );
+  });
+
+  return isFocus ? DateComponent : TextComponent;
+}

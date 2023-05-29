@@ -15,12 +15,17 @@ export default function App() {
     <div>
       <h1>Hello StackBlitz!</h1>
       <p>Start editing to see some magic happen :)</p>
-      <Child h2='v1'
+      <h2>{'v1'}</h2>
+  <input type="text" id="name" name="name" value={parentState.cName} />
+      <Child 
       cDate={parentState.cDate} 
       cName={parentState.cName}
       cEmail={parentState.cEmail}
       onChange={onChange}
       />
+          <input type="email" id="email" name="email" placeholder={"email@domain.om"} value={parentState.cEmail}/>
+          <div>New Value {parentState.cDate?.toString()}</div>
+  <button > my button </button>
     </div>
   );
 }
