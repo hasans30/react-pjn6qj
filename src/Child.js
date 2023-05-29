@@ -7,18 +7,15 @@ export default function Child({ h2, cDate, cName, cEmail, onChange }) {
   const myChangeHandler = (newDate) => {
     onChange(newDate);
   };
-  const DateComponent = React.useMemo(() => {
-    return (
+
+  const TextDateComponent = React.useMemo(() => {
+    return isFocus ? (
       <DatePicker
         label="Start date"
         value={cDate}
         onSelectDate={myChangeHandler}
       />
-    );
-  });
-
-  const TextComponent = React.useMemo(() => {
-    return (
+    ): (
       <TextField
         value={cDate}
         onFocus={() => {
@@ -26,7 +23,7 @@ export default function Child({ h2, cDate, cName, cEmail, onChange }) {
         }}
       />
     );
-  });
+  }, [isFocus]);
 
-  return isFocus ? DateComponent : TextComponent;
+  return TextDateComponent;
 }
